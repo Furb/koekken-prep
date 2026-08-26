@@ -1,18 +1,21 @@
-import {defineConfig} from 'sanity'
-import {structureTool} from 'sanity/structure'
-import {visionTool} from '@sanity/vision'
-import {schemaTypes} from './schemaTypes'
+"use client";
+
+import { defineConfig } from "sanity";
+import { structureTool } from "sanity/structure";
+import { visionTool } from "@sanity/vision";
+import { schemaTypes } from "./schemaTypes";
 
 export default defineConfig({
-  name: 'default',
-  title: 'Moellens Prep',
+  name: "default",
+  title: "Moellens Prep",
 
-  projectId: 'smtvmc9d',
-  dataset: 'production',
+  projectId: "smtvmc9d",
+  dataset: "production",
+  basePath: "/admin",
 
   plugins: [structureTool(), visionTool()],
 
   schema: {
     types: schemaTypes,
   },
-})
+});

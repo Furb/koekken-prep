@@ -1,16 +1,28 @@
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
+
 # AGENTS.md
 
-## Context & Monorepo
+## Context
 
 Internal kitchen recipe application running on wall-mounted tablets/laptops.
 
 - **PackageManager**: `pnpm`
-- **Monorepo**: `/studio` (Sanity Studio) & `/frontend` (Next.js, React, TypeScript)
+- **Architecture**: Next.js application with embedded Sanity Studio at `/admin`
+- **Sanity Studio**: `/studio`
 
 ## Commands
 
-- **Root**: `pnpm dev` | `pnpm build`
-- **Targeted**: `pnpm --filter frontend <script>` | `pnpm --filter studio <script>`
+- **Development**: `pnpm dev`
+- **Build**: `pnpm build`
+- **Typecheck**: `pnpm typecheck`
 
 ## Strict Guardrails
 
