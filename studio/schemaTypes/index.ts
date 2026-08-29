@@ -1,3 +1,4 @@
-import {opskrifter} from './opskrifter'
+import { ingrediens } from "./ingrediens";
+import { opskrifter } from "./opskrifter";
 
-export const schemaTypes = [opskrifter]
+export const schemaTypes = [opskrifter, ingrediens];
