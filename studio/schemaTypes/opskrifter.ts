@@ -28,5 +28,12 @@ export const opskrifter = defineType({
       type: "array",
       of: [{ type: "ingrediens" }],
     }),
+
+    defineField({
+      name: "udbytte",
+      title: "Opskriftens Udbytte",
+      type: "string",
+      description: "f.eks 3x3L",
+    }),
   ],
 });

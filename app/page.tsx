@@ -1,15 +1,7 @@
-import { client } from '@/lib/sanity';
-
-type Recipe = {
-  _id: string;
-  title: string;
-};
+import { getRecipes } from "@/lib/sanity";
 
 export default async function Home() {
-  const recipes = await client.fetch<Recipe[]>(`*[_type == "opskrifter"] | order(title asc) {
-    _id,
-    title
-  }`);
+  const recipes = await getRecipes();
 
   return (
     <div className="px-4 py-8">

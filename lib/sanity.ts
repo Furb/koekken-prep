@@ -1,8 +1,27 @@
-import { createClient } from 'next-sanity';
+import { defineQuery } from "next-sanity";
+import { sanityFetch } from "./live";
+import { client } from "./client";
 
-export const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-  apiVersion: '2024-01-01',
-  useCdn: false,
-});
+export type Recipe = {
+  _id: string;
+  title: string;
+};
+
+export const recipesQuery =
+  defineQuery(`*[_type == "opskrifter"] | order(title asc) {
+  _id,
+  title
+}`);
+
+export async function getRecipes(): Promise<Recipe[]> {
+  const result = await sanityFetch({
+    query: recipesQuery,
+    params: {},
+  });
+
+  return result.data as Recipe[];
+}
+
+export async function getRecipesDirect(): Promise<Recipe[]> {
+  return client.fetch(recipesQuery);
+}
