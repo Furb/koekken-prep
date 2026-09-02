@@ -9,5 +9,9 @@
 }
 
 h1 {
-  @apply font-bold uppercase text-xl tracking-wider;
+  @apply font-light uppercase text-xl tracking-wider;
+}
+
+h2 {
+  @apply font-semibold text-lg;
 }

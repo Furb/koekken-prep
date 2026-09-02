@@ -1,11 +1,20 @@
 import { defineField, defineType } from "sanity";
-import { DocumentTextIcon } from "@sanity/icons/DocumentText";
+
+import { BookIcon } from "@sanity/icons/Book";
 
 export const opskrifter = defineType({
   name: "opskrifter",
   title: "Opskrifter",
   type: "document",
-  icon: DocumentTextIcon,
+
+  icon: BookIcon,
+  fieldsets: [
+    {
+      name: "opskriftInfo",
+      title: "Info",
+      options: { columns: 2 },
+    },
+  ],
   fields: [
     defineField({
       name: "title",
@@ -17,10 +26,25 @@ export const opskrifter = defineType({
       name: "slug",
       title: "Slug",
       type: "slug",
+      description: "Du skal trykke på gererate knappen for at skabe opskriften",
       options: {
         source: "title",
       },
-      validation: (rule) => rule.required(),
+      validation: (rule) =>
+        rule
+          .required()
+          .error(`Du skal trykke på "gererate" for at skabe opskriften`),
+    }),
+
+    defineField({
+      name: "Aktuel",
+      type: "string",
+      description: "Er det den nuværende version af opskriften?",
+      options: {
+        list: ["Aktuel", "Arkiv"],
+        layout: "radio",
+      },
+      initialValue: "Aktuel",
     }),
     defineField({
       name: "ingredienser",
@@ -28,12 +52,31 @@ export const opskrifter = defineType({
       type: "array",
       of: [{ type: "ingrediens" }],
     }),
-
+    defineField({
+      name: "metode",
+      title: "Evt. metode",
+      type: "text",
+    }),
     defineField({
       name: "udbytte",
-      title: "Opskriftens Udbytte",
+      title: "Udbytte",
       type: "string",
-      description: "f.eks 3x3L",
+      placeholder: "f.eks 2x3L",
+      fieldset: "opskriftInfo",
+    }),
+
+    defineField({
+      name: "author",
+      title: "Initialer",
+      type: "string",
+      fieldset: "opskriftInfo",
     }),
   ],
+
+  preview: {
+    select: {
+      title: "title",
+      subtitle: "author",
+    },
+  },
 });
