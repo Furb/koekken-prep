@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { sanityFetch } from "@/lib/live";
-import { recipesQuery } from "@/lib/queries";
+import { searchRecipesQuery } from "@/lib/queries";
 
 export default async function Home() {
   const { data: recipes } = await sanityFetch({
-    query: recipesQuery,
+    query: searchRecipesQuery,
     stega: false,
   });
 

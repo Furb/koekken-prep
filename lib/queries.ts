@@ -1,6 +1,6 @@
 import { defineQuery } from "next-sanity";
 
-export const recipesQuery =
+export const searchRecipesQuery =
   defineQuery(`*[_type == "opskrifter"] | order(title asc) {
   _id,
   title,
