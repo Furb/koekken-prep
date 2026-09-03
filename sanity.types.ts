@@ -177,9 +177,18 @@ export type AllSanitySchemaTypes =
   | Geopoint;
 
 // Source: lib/queries.ts
-// Variable: recipesQuery
-// Query: *[_type == "opskrifter"] | order(title asc) {  _id,  title,  "slug": slug.current}
-export type RecipesQueryResult = Array<{
+// Variable: allRecipesQuery
+// Query: *[_type == "opskrifter" && (!defined(Aktuel) || Aktuel == "Aktuel")] | order(title asc) {    _id,    title,    "slug": slug.current  }
+export type AllRecipesQueryResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: string | null;
+}>;
+
+// Source: lib/queries.ts
+// Variable: searchRecipesQuery
+// Query: *[_type == "opskrifter" && (!defined(Aktuel) || Aktuel == "Aktuel") && (!$q || title match ($q + "*") || ingredienser[].name match ($q + "*"))] | order(title asc) {  _id,  title,  "slug": slug.current}
+export type SearchRecipesQueryResult = Array<{
   _id: string;
   title: string | null;
   slug: string | null;
@@ -187,7 +196,7 @@ export type RecipesQueryResult = Array<{
 
 // Source: lib/queries.ts
 // Variable: recipeBySlugQuery
-// Query: *[_type == "opskrifter" && slug.current == $slug][0] {    _id,    title,    "slug": slug.current,    udbytte,    metode,    ingredienser[] {      name,      amount,      unit    }  }
+// Query: *[_type == "opskrifter" && Aktuel == "Aktuel" && slug.current == $slug][0] {    _id,    title,    "slug": slug.current,    udbytte,    metode,    ingredienser[] {      name,      amount,      unit    }  }
 export type RecipeBySlugQueryResult = {
   _id: string;
   title: string | null;
@@ -216,7 +225,8 @@ export type RecipeBySlugQueryResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "opskrifter"] | order(title asc) {\n  _id,\n  title,\n  "slug": slug.current\n}': RecipesQueryResult;
-    '\n  *[_type == "opskrifter" && slug.current == $slug][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    udbytte,\n    metode,\n    ingredienser[] {\n      name,\n      amount,\n      unit\n    }\n  }\n': RecipeBySlugQueryResult;
+    '\n  *[_type == "opskrifter" && (!defined(Aktuel) || Aktuel == "Aktuel")] | order(title asc) {\n    _id,\n    title,\n    "slug": slug.current\n  }\n': AllRecipesQueryResult;
+    '*[_type == "opskrifter" && (!defined(Aktuel) || Aktuel == "Aktuel") && (!$q || title match ($q + "*") || ingredienser[].name match ($q + "*"))] | order(title asc) {\n  _id,\n  title,\n  "slug": slug.current\n}': SearchRecipesQueryResult;
+    '\n  *[_type == "opskrifter" && Aktuel == "Aktuel" && slug.current == $slug][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    udbytte,\n    metode,\n    ingredienser[] {\n      name,\n      amount,\n      unit\n    }\n  }\n': RecipeBySlugQueryResult;
   }
 }
