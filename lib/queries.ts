@@ -1,7 +1,7 @@
 import { defineQuery } from "next-sanity";
 
 export const allRecipesQuery = defineQuery(`
-  *[_type == "opskrifter" && (!defined(Aktuel) || Aktuel == "Aktuel")] | order(title asc) {
+  *[_type == "opskrifter" && Aktuel == "Aktuel"] | order(title asc) {
     _id,
     title,
     "slug": slug.current
@@ -9,7 +9,7 @@ export const allRecipesQuery = defineQuery(`
 `);
 
 export const searchRecipesQuery =
-  defineQuery(`*[_type == "opskrifter" && (!defined(Aktuel) || Aktuel == "Aktuel") && (!$q || title match ($q + "*") || ingredienser[].name match ($q + "*"))] | order(title asc) {
+  defineQuery(`*[_type == "opskrifter" && Aktuel == "Aktuel" && (!$q || title match ($q + "*") || ingredienser[].name match ($q + "*"))] | order(title asc) {
   _id,
   title,
   "slug": slug.current

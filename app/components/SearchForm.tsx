@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useId, useRef } from "react";
+import SearchIcon from "./SearchIcon";
 
 type SearchFormProps = {
   initialQuery: string;
@@ -27,10 +28,18 @@ export default function SearchForm({ initialQuery }: SearchFormProps) {
   };
 
   return (
-    <form action="/" method="get" className="relative mb-8 flex gap-2">
+    <form
+      action="/"
+      method="get"
+      role="search"
+      className="relative mb-8 flex items-center gap-2 rounded-lg border px-3"
+    >
       <label htmlFor={inputId} className="sr-only">
         Søg efter opskrift eller ingrediens
       </label>
+      <span aria-hidden="true">
+        <SearchIcon />
+      </span>
       <input
         id={inputId}
         name="q"
@@ -38,11 +47,8 @@ export default function SearchForm({ initialQuery }: SearchFormProps) {
         defaultValue={initialQuery}
         onChange={(event) => handleChange(event.target.value)}
         placeholder="Søg efter opskrift eller ingrediens"
-        className="min-w-0 flex-1 rounded-lg border px-4 py-3"
+        className="min-w-0 flex-1 border-0 px-1 py-3 text-sm outline-none"
       />
-      <button type="submit" className="rounded-lg border px-4 py-3">
-        Søg
-      </button>
     </form>
   );
 }
