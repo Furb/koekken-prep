@@ -7,21 +7,14 @@ export const ingrediens = defineType({
 
   fields: [
     defineField({
-      name: "name",
-      type: "string",
-      title: "Ingrediens",
-    }),
-
-    defineField({
       name: "amount",
       type: "number",
-      title: "Mængde",
     }),
 
     defineField({
       name: "unit",
       type: "string",
-      title: "Enhed",
+      title: "",
       options: {
         layout: "dropdown",
         list: [
@@ -37,6 +30,11 @@ export const ingrediens = defineType({
           { title: "dåse", value: "dase" },
         ],
       },
+    }),
+
+    defineField({
+      name: "name",
+      type: "string",
     }),
   ],
 });
