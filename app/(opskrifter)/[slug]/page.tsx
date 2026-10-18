@@ -22,7 +22,7 @@ export default async function RecipePage({ params }: PageProps) {
     <div className="px-4">
       <div className="mb-8">
         <Link href="/">
-          <small>← Oversigt</small>
+          <small>← Opskrifter</small>
         </Link>
       </div>
 

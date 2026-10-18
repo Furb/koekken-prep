@@ -5,7 +5,7 @@ import { Search2Duotone } from "@lineiconshq/free-icons";
 const SearchIcon = () => {
   return (
     <div>
-      <Lineicons icon={Search2Duotone} size={36} />
+      <Lineicons icon={Search2Duotone} size={24} />
     </div>
   );
 };
