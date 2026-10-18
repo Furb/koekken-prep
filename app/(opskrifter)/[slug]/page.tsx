@@ -47,9 +47,11 @@ export default async function RecipePage({ params }: PageProps) {
           </li>
         ))}
       </ul>
-      <div className="px-6 py-8 bg-soft rounded-md">
-        <p className="whitespace-pre-line">{recipe.metode}</p>
-      </div>
+      {recipe.metode && (
+        <div className="px-6 py-8 bg-soft rounded-md">
+          <p className="whitespace-pre-line">{recipe.metode}</p>
+        </div>
+      )}
     </div>
   );
 }
