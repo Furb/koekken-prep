@@ -26,9 +26,11 @@ export default async function RecipePage({ params }: PageProps) {
         </Link>
       </div>
 
-      <div className="flex items-end justify-between mb-4">
-        <h2>{recipe.title}</h2>
-        <p className="font-semibold text">{recipe.udbytte} L</p>
+      <div className="flex items-end justify-between mb-20">
+        <h2 className="text-dark text-2xl font-semibold">{recipe.title}</h2>
+        {recipe.udbytte && (
+          <p className="font-semibold text">{recipe.udbytte} L</p>
+        )}
       </div>
 
       <ul className="space-y-4 *:border-b-green *:border-b *:pb-1 mb-8">

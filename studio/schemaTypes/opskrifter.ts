@@ -1,6 +1,8 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 import { BookIcon } from "@sanity/icons/Book";
+
+import { IngredientsField } from "../custom/components/IngrediensInput";
 
 export const opskrifter = defineType({
   name: "opskrifter",
@@ -50,7 +52,14 @@ export const opskrifter = defineType({
       name: "ingredienser",
       title: "Ingredienser",
       type: "array",
-      of: [{ type: "ingrediens" }],
+      components: {
+        field: IngredientsField,
+      },
+      of: [
+        defineArrayMember({
+          type: "ingrediens",
+        }),
+      ],
     }),
     defineField({
       name: "metode",
